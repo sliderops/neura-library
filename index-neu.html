@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang='de'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>NEURA Library</title><meta name='description' content='NEURA Library - kostenlose eBooks auf Deutsch zum Lesen, Hören und Herunterladen (EPUB und Textdatei). Romane, Sachbücher und Lernbücher, ohne Anmeldung.'><meta name='theme-color' content='#120a1f'><link rel='canonical' href='https://sliderops.github.io/neura-library/'><meta property='og:type' content='website'><meta property='og:title' content='NEURA Library'><meta property='og:description' content='Kostenlose eBooks auf Deutsch - lesen, hören, herunterladen. Ohne Anmeldung.'><meta property='og:url' content='https://sliderops.github.io/neura-library/'><meta property='og:locale' content='de_DE'><meta name='twitter:card' content='summary'><link rel='icon' href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23120a1f'/%3E%3Cpath d='M14 16h15a6 6 0 0 1 6 6v26a5 5 0 0 0-5-5H14z' fill='%23c4a1ff'/%3E%3Cpath d='M50 16H35a6 6 0 0 0-6 6v26a5 5 0 0 1 5-5h16z' fill='%238b5cf6'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#120a1f;--flaeche:#1c1230;--flaeche2:#271a42;--linie:#3d2d60;--text:#f1ebfc;--leise:#b6a8d2;--akzent:#c4a1ff;--akzent2:#8b5cf6;--lese:#f6f1e7;--fs:19px;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.55;-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--akzent);outline-offset:2px;border-radius:8px}
+.kopf{position:sticky;top:0;z-index:20;background:rgba(18,10,31,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--linie)}
+.kopf-innen{max-width:1040px;margin:0 auto;padding:14px 20px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px}
+.marke{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:700;letter-spacing:.01em;color:var(--text)}
+.marke small{display:block;font-family:system-ui,sans-serif;font-size:13px;font-weight:400;color:var(--leise);letter-spacing:0}
+.suche{flex:1 1 260px;min-width:0;position:relative}
+.suche input{width:100%;padding:12px 16px;border-radius:12px;border:1px solid var(--linie);background:var(--flaeche);color:var(--text);font-size:16px}
+.suche input::placeholder{color:#8f80ad}
+.suche input:focus{border-color:var(--akzent2);outline:none;box-shadow:0 0 0 3px rgba(139,92,246,.35)}
+main{max-width:1040px;margin:0 auto;padding:20px 20px 64px}
+.krumen{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;min-height:0}
+.krumen:empty{display:none}
+.krume{background:var(--flaeche);border:1px solid var(--linie);border-radius:999px;padding:7px 14px;font-size:14px;color:var(--text)}
+.krume:hover{border-color:var(--akzent2)}
+.krume.jetzt{border-color:transparent;background:transparent;color:var(--leise);cursor:default}
+.titel{font-family:Georgia,serif;font-size:24px;margin:0 0 4px}
+.unter-titel{margin:0 0 18px;color:var(--leise)}
+#liste.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+#liste.grid .titel,#liste.grid .unter-titel{grid-column:1/-1}
+#liste.grid .unter-titel{margin:-10px 0 4px}
+.katcard{text-align:left;background:var(--flaeche);border:1px solid var(--linie);border-left:5px solid hsl(var(--h,265) 70% 68%);border-radius:14px;padding:16px 16px 14px;min-height:112px;display:flex;flex-direction:column;gap:4px;transition:background .15s,border-color .15s}
+.katcard:hover{background:var(--flaeche2);border-color:hsl(var(--h,265) 70% 68%)}
+.katcard h2{margin:0;font-size:18px;line-height:1.25;color:var(--text)}
+.katcard .sub{margin:0;font-size:14px;color:var(--leise);line-height:1.35}
+.katcard .zahl{margin-top:auto;padding-top:8px;font-size:14px;font-weight:600;color:hsl(var(--h,265) 80% 78%)}
+.katcard.leer{opacity:.78}
+.katcard.leer .zahl{font-weight:400;color:var(--leise)}
+.buch{display:block;width:100%;text-align:left;background:var(--flaeche);border:1px solid var(--linie);border-radius:14px;padding:16px 18px;margin:0 0 12px;transition:background .15s,border-color .15s}
+.buch:hover{background:var(--flaeche2);border-color:var(--akzent2)}
+.buch .bt{display:block;font-family:Georgia,serif;font-size:19px;line-height:1.3;margin-bottom:6px}
+.buch .bk{display:block;font-size:14px;color:var(--leise)}
+.buch .bm{display:inline-block;margin-top:10px;padding:4px 12px;border-radius:999px;background:rgba(139,92,246,.18);color:#dcc8ff;font-size:13px}
+.leerhinweis{padding:28px 20px;border:1px dashed var(--linie);border-radius:14px;color:var(--leise);text-align:center}
+.fuss{max-width:1040px;margin:0 auto;padding:0 20px 40px;font-size:13px;color:var(--leise)}
+.fuss code{word-break:break-all;color:#d9c9f5}
+#reader{display:none}
+body.lesen #reader{display:block}
+body.lesen #liste,body.lesen #nav,body.lesen .suche,body.lesen .fuss{display:none}
+body.lesen .kopf{display:none}
+.leiste{position:sticky;top:0;z-index:25;background:rgba(18,10,31,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--linie)}
+.leiste-innen{max-width:760px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:10px}
+.leiste .zu{background:var(--flaeche);border:1px solid var(--linie);border-radius:999px;padding:8px 16px;font-size:14px}
+.leiste .zu:hover{border-color:var(--akzent2)}
+.leiste .mitte{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px;color:var(--leise)}
+.leiste .gr{background:var(--flaeche);border:1px solid var(--linie);border-radius:10px;min-width:44px;padding:8px 10px;font-weight:700}
+.leiste .gr:hover{border-color:var(--akzent2)}
+.balken{height:3px;background:var(--linie)}
+.balken span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--akzent2),var(--akzent))}
+.lese{max-width:680px;margin:0 auto;padding:28px 20px 80px;font-family:Georgia,'Iowan Old Style','Times New Roman',serif}
+.lese .lk{margin:0 0 6px;font-family:system-ui,sans-serif;font-size:14px;color:var(--leise)}
+.lese h2{font-size:clamp(28px,6vw,38px);line-height:1.2;margin:0 0 10px;color:var(--text)}
+.lese .lm{margin:0 0 26px;font-family:system-ui,sans-serif;font-size:14px;color:var(--leise)}
+.inhalt{background:var(--flaeche);border:1px solid var(--linie);border-radius:14px;padding:16px 20px;margin:0 0 36px;font-family:system-ui,sans-serif}
+.inhalt h3{margin:0 0 8px;font-size:15px;color:var(--leise);font-weight:600}
+.inhalt ol{margin:0;padding-left:22px}
+.inhalt li{margin:2px 0}
+.inhalt a{color:#dcc8ff;text-decoration:none;display:inline-block;padding:4px 0}
+.inhalt a:hover{text-decoration:underline}
+.kap{margin:0 0 44px;scroll-margin-top:70px}
+.kap h3{font-size:24px;line-height:1.3;margin:0 0 16px;color:var(--akzent)}
+.kap p{font-size:var(--fs);line-height:1.75;margin:0 0 1.1em;color:var(--lese);max-width:68ch;hyphens:auto}
+.ende{text-align:center;padding-top:8px}
+.ende button{background:var(--akzent2);border:0;border-radius:999px;padding:12px 24px;font-weight:600;color:#fff}
+.ende button:hover{background:#7c4be0}
+@media (max-width:560px){.kopf-innen{padding:12px 16px}.marke{font-size:22px}main{padding:16px 16px 56px}#liste.grid{grid-template-columns:1fr 1fr;gap:10px}.katcard{min-height:104px;padding:12px}.katcard h2{font-size:16px}}
+@media (max-width:360px){#liste.grid{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+.btc-btn{background:linear-gradient(135deg,#f7931a,#e07b00);color:#1a0f00;border:0;border-radius:999px;padding:10px 18px;font-weight:700;font-size:14px;white-space:nowrap}
+.btc-btn:hover{filter:brightness(1.1)}
+.fuss .btc-btn{margin:0 0 12px}
+.ende-hilfe{text-align:center;margin:0 0 28px;padding:18px;border:1px dashed var(--linie);border-radius:14px;font-family:system-ui,sans-serif}
+.ende-hilfe p{margin:0 0 12px;color:var(--leise);font-size:15px}
+.btc-modal{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(10,5,20,.8)}
+.btc-modal[hidden]{display:none}
+.btc-box{width:100%;max-width:440px;max-height:100%;overflow:auto;background:var(--flaeche);border:1px solid var(--linie);border-radius:18px;padding:24px 22px;box-shadow:0 20px 60px rgba(0,0,0,.5);font-family:system-ui,sans-serif}
+.btc-box h2{margin:0 0 8px;font-family:Georgia,serif;font-size:22px}
+.btc-box p{margin:0 0 14px;color:var(--leise);font-size:15px}
+.btc-adr{display:block;word-break:break-all;padding:12px 14px;margin:0 0 14px;border-radius:12px;background:var(--bg);border:1px solid var(--linie);color:#e9dcff;font-size:14px;user-select:all}
+.btc-aktionen{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 12px}
+.btc-prim{flex:1 1 150px;background:var(--akzent2);border:0;border-radius:999px;padding:12px 18px;font-weight:600;color:#fff}
+.btc-prim:hover{background:#7c4be0}
+.btc-sek{flex:1 1 150px;text-align:center;background:var(--flaeche2);border:1px solid var(--linie);border-radius:999px;padding:12px 18px;color:var(--text);text-decoration:none;font-weight:600}
+.btc-sek:hover{border-color:var(--akzent2)}
+.btc-box .btc-status{min-height:1.4em;margin:0 0 8px;color:#9be7b0;font-size:14px}
+.btc-box .btc-hinweis{font-size:13px;margin-bottom:16px}
+.btc-zu{display:block;margin:0 auto;background:transparent;border:1px solid var(--linie);border-radius:999px;padding:8px 20px;font-size:14px}
+body.btc-offen{overflow:hidden}
+.buch-wrap{margin:0 0 12px}
+.buch-wrap .buch{margin:0;border-bottom-left-radius:0;border-bottom-right-radius:0}
+.buch-aktion{display:flex;border:1px solid var(--linie);border-top:0;border-radius:0 0 14px 14px;overflow:hidden;background:var(--flaeche)}
+.buch-aktion .akt{flex:1;background:transparent;border:0;padding:12px 10px;font-size:15px;font-weight:600}
+.buch-aktion .akt+.akt{border-left:1px solid var(--linie)}
+.buch-aktion .akt:hover{background:var(--flaeche2);color:#dcc8ff}
+.leiste .gr.an{border-color:var(--akzent2);background:rgba(139,92,246,.3)}
+.hoer{max-width:760px;margin:0 auto;padding:8px 20px 12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:system-ui,sans-serif}
+.hoer[hidden]{display:none}
+.hoer button,.hoer select{background:var(--flaeche);border:1px solid var(--linie);border-radius:999px;padding:8px 14px;font-size:14px;color:var(--text)}
+.hoer button:hover{border-color:var(--akzent2)}
+.hoer .hp{background:var(--akzent2);border-color:transparent;color:#fff;font-weight:600;min-width:128px}
+.hoer select{max-width:150px}
+.hoer .hi{flex:1 1 100%;font-size:13px;color:var(--leise)}
+.kap .spricht{background:rgba(139,92,246,.22);border-radius:8px;box-shadow:0 0 0 6px rgba(139,92,246,.22)}
+body.hoeren .kap{scroll-margin-top:150px}
+.leiste #hb{white-space:nowrap;padding:8px 12px}
+.modus{display:flex;gap:10px;margin:0 0 22px;font-family:system-ui,sans-serif}
+.modus .m{flex:1;padding:14px 10px;border-radius:14px;border:1px solid var(--linie);background:var(--flaeche);font-size:16px;font-weight:600}
+.modus .m:hover{border-color:var(--akzent2)}
+.modus .m.an{background:var(--akzent2);border-color:transparent;color:#fff}
+.buch-aktion .akt{font-size:14px;padding:12px 6px}
+.modus{margin-bottom:10px}
+.dlbtn{display:block;width:100%;margin:0 0 22px;padding:12px;border-radius:14px;border:1px dashed var(--linie);background:transparent;font-family:system-ui,sans-serif;font-size:15px;font-weight:600}
+.dlbtn:hover{border-color:var(--akzent2);color:#dcc8ff}
+.buch-wrap{position:relative}
+.buch .bt{padding-right:34px}
+.favstern{position:absolute;top:6px;right:6px;width:42px;height:42px;border-radius:50%;background:transparent;border:0;font-size:22px;line-height:1;color:#f7c948;z-index:2}
+.favstern:hover{background:rgba(247,201,72,.12)}
+.bf{display:block;height:4px;border-radius:999px;background:var(--linie);margin-top:12px;overflow:hidden}
+.bf span{display:block;height:100%;background:linear-gradient(90deg,var(--akzent2),var(--akzent))}
+.bs{display:block;margin-top:6px;font-size:13px;color:var(--leise)}
+.abschnitt{grid-column:1/-1;margin:0 0 14px}
+.abschnitt .titel{font-size:20px;margin:0 0 10px}
+.aktzeile{display:flex;gap:10px;margin:0 0 22px}
+.aktzeile .dlbtn{margin:0;flex:1}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:20px;z-index:60;display:flex;align-items:center;gap:12px;max-width:92vw;background:var(--flaeche2);border:1px solid var(--akzent2);border-radius:14px;padding:10px 14px;font-size:14px;font-family:system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.toast[hidden]{display:none}
+.toast button{background:var(--akzent2);border:0;border-radius:999px;padding:6px 12px;color:#fff;font-weight:600;white-space:nowrap}
+</style></head><body>
+<header class='kopf'><div class='kopf-innen'><h1 class='marke'>NEURA Library<small id='zaehler'></small></h1><div class='suche'><input id='suche' type='search' placeholder='Buch, Kategorie oder Thema suchen' aria-label='Bibliothek durchsuchen' oninput='filtern()'></div><button type='button' class='btc-btn' onclick='btcOeffnen()'>₿ Unterstützen</button></div></header>
+<main><nav id='nav' class='krumen' aria-label='Navigation'></nav><div id='liste'></div><div id='reader'></div></main>
+<footer class='fuss'><button type='button' class='btc-btn' onclick='btcOeffnen()'>₿ Bibliothek unterstützen</button><p>Bitcoin-Adresse: <code>bc1qzkfpp4lvzmxqntaxae5hu99zzdzsgaajsknstp</code></p></footer><div id='btc' class='btc-modal' hidden role='dialog' aria-modal='true' aria-labelledby='btc-titel' onclick='if(event.target===this)btcSchliessen()'><div class='btc-box'><h2 id='btc-titel'>Die Bibliothek unterstützen</h2><p>Die NEURA Library ist kostenlos. Wenn sie dir gefällt, freue ich mich über eine kleine Bitcoin-Spende.</p><code class='btc-adr' id='btc-adr'>bc1qzkfpp4lvzmxqntaxae5hu99zzdzsgaajsknstp</code><div class='btc-aktionen'><button type='button' class='btc-prim' id='btc-kopieren' onclick='btcKopieren()'>Adresse kopieren</button><a class='btc-sek' href='bitcoin:bc1qzkfpp4lvzmxqntaxae5hu99zzdzsgaajsknstp'>In Wallet öffnen</a></div><p id='btc-status' class='btc-status' role='status' aria-live='polite'></p><p class='btc-hinweis'>Bitte nur Bitcoin (BTC) an diese Adresse senden. Bitcoin-Zahlungen lassen sich nicht rückgängig machen.</p><button type='button' class='btc-zu' onclick='btcSchliessen()'>Schließen</button></div></div><div id='dl' class='btc-modal' hidden role='dialog' aria-modal='true' aria-labelledby='dl-titel' onclick='if(event.target===this)dlSchliessen()'><div class='btc-box'><h2 id='dl-titel'>eBook herunterladen</h2><p id='dl-buch'></p><div class='btc-aktionen'><button type='button' class='btc-prim' onclick='dlEpub()'>📱 EPUB (E-Reader)</button><button type='button' class='btc-sek' onclick='dlTxt()'>📄 Textdatei (.txt)</button></div><p id='dl-status' class='btc-status' role='status' aria-live='polite'></p><p class='btc-hinweis'>EPUB öffnest du in Apple Books, Google Play Büchern, Kobo und vielen E-Reader-Apps. Die Textdatei geht überall.</p><button type='button' class='btc-zu' onclick='dlSchliessen()'>Schließen</button></div></div>
+<script>
+var BUECHER=[];var BUCH_CACHE={};
+function ladeStatus(t){var l=document.getElementById('ladebalken');if(!l){l=document.createElement('div');l.id='ladebalken';l.className='toast';document.body.appendChild(l)}if(!t){l.hidden=true;return}l.textContent=t;l.hidden=false}
+function ladeBuch(k,fn){
+ if(k&&k.chapters){fn(k);return}
+ var d=k&&k.datei;if(!d){return}
+ if(BUCH_CACHE[d]){fn(BUCH_CACHE[d]);return}
+ ladeStatus('Buch wird geladen ...');
+ fetch('buecher/'+encodeURIComponent(d)+'.json').then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(b){
+  b.kapitel=b.chapters.length;b.min=k.min;b.datei=d;BUCH_CACHE[d]=b;ladeStatus('');fn(b)
+ }).catch(function(e){ladeStatus('');toast('Das Buch konnte nicht geladen werden. Bitte Internetverbindung prüfen und es noch einmal versuchen.')})}
+function kapZahl(b){return b.kapitel||(b.chapters?b.chapters.length:0)}
+function lesezeit(b){if(b.min)return b.min;if(!b.chapters)return 1;var w=0;for(var i=0;i<b.chapters.length;i++){w+=b.chapters[i][1].split(/\s+/).length;}return Math.max(1,Math.round(w/200));}
+var ANSICHT='kats';var AKT_KAT='';var AKT_UNTER='';
+var ALLE_KATS=['Sachbücher','Romane','Lernbücher / Schule','Arbeitsbücher / Vorlagen','Comics / Manga / Graphic Novels','Hörbuch-Texte / Drehbücher','Witze / Rätsel / Quiz','Gute-Nacht-Geschichten'];
+var UNTER_FEST={'Sachbücher':['Schulbücher','Geld & Freiheit','Minimalismus & Leben','Gesundheit','Psychologie','Geschichte','Biografie','Technik & KI','Beruf','Kreativität','Garten','Kochen','Reisen','Business','Wohnen','Familie','Sport','Musik','Handwerk','Fotografie','Sprache','Schlaf','Kinder','Tiere','Natur','Wissenschaft','Lernen','Philosophie','Religion & Spiritualität','Umwelt & Nachhaltigkeit'],'Lernbücher / Schule':['Mathe','Deutsch','Englisch','Geschichte','Erdkunde','Französisch'],'Arbeitsbücher / Vorlagen':['Checklisten','Tagebuch','Planner'],'Comics / Manga / Graphic Novels':['Comics','Manga','Graphic Novels'],'Hörbuch-Texte / Drehbücher':['Hörbuch-Texte','Drehbücher'],'Witze / Rätsel / Quiz':['Witze','Rätsel','Quiz'],'Gute-Nacht-Geschichten':['5-10 Min Geschichten','Kinder']};
+var KAT_TEXT={'Sachbücher':'Wissen für den Alltag','Romane':'Krimi, Fantasy & mehr','Lernbücher / Schule':'Schulfächer - super einfach erklärt','Arbeitsbücher / Vorlagen':'Checklisten, Tagebuch, Planner','Comics / Manga / Graphic Novels':'Zum Lesen & Schauen','Hörbuch-Texte / Drehbücher':'Zum Hören & Spielen','Witze / Rätsel / Quiz':'Rätsel laufen extrem gut','Gute-Nacht-Geschichten':'Für Kinder, 5-10 Min'};
+function vollstaendig(b){return !!(b&&kapZahl(b)>0)}
+function sichtbar(){return BUECHER.filter(vollstaendig)}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!==undefined)e.innerHTML=html;return e}
+function katCount(k){return sichtbar().filter(function(b){return b.kat===k}).length}
+function unterAlle(k){var s=(UNTER_FEST[k]||[]).slice();sichtbar().forEach(function(b){if(b.kat===k&&s.indexOf(b.unter)===-1)s.push(b.unter)});return s}
+function unterCount(k,u){return sichtbar().filter(function(b){return b.kat===k&&b.unter===u}).length}
+function buecherWort(n){return n+(n===1?' Buch':' Bücher')}
+function minWort(b){var m=lesezeit(b);if(m>=60){var h=Math.floor(m/60),r=m%60;return 'ca. '+h+' Std'+(r?' '+r+' Min':'')}return 'ca. '+m+' Min'}
+function krumen(teile){var n=document.getElementById('nav');n.innerHTML='';teile.forEach(function(t,i){var b=el('button','krume'+(t.fn?'':' jetzt'),esc(t.text));if(t.fn){b.onclick=t.fn}else{b.disabled=true;b.setAttribute('aria-current','page')}n.appendChild(b)})}
+function buchKarte(b){var s=POS[b.title];var halb=!!(s&&s.pc>0&&s.pc<100);var w=el('div','buch-wrap');var bar=(s&&s.pc>0)?'<span class="bf"><span style="width:'+s.pc+'%"></span></span><span class="bs">'+(s.pc>=100?'Gelesen':'Weiter bei '+s.pc+' %')+'</span>':'';var d=el('button','buch','<span class="bt">'+esc(b.title)+'</span><span class="bk">'+esc(b.kat)+' / '+esc(b.unter)+'</span><span class="bm">'+kapZahl(b)+' Kapitel, '+minWort(b)+'</span>'+bar);d.type='button';d.onclick=function(){oeffnen(b,false)};w.appendChild(d);var st=el('button','favstern',favIst(b)?'★':'☆');st.type='button';st.setAttribute('data-t',b.title);st.setAttribute('aria-label','Als Favorit markieren');st.onclick=function(){favToggle(b)};w.appendChild(st);var a=el('div','buch-aktion');var l=el('button','akt','📖 '+(halb?'Weiterlesen':'Lesen'));l.type='button';l.onclick=function(){oeffnen(b,false)};a.appendChild(l);var h=el('button','akt','🎧 '+(halb?'Weiterhören':'Hören'));h.type='button';h.onclick=function(){oeffnen(b,true)};a.appendChild(h);var g=el('button','akt','⬇ Laden');g.type='button';g.onclick=function(){dlOeffnen(b)};a.appendChild(g);w.appendChild(a);return w}
+function kartenFarbe(i){return Math.round((265+i*37)%360)}
+function zeigeKats(){ANSICHT='kats';krumen([]);var l=document.getElementById('liste');l.innerHTML='';l.className='grid';l.appendChild(el('h2','titel','Alle Kategorien'));ALLE_KATS.forEach(function(k,i){var c=katCount(k);var d=el('button','katcard'+(c?'':' leer'),'<h2>'+esc(k)+'</h2><p class="sub">'+esc(KAT_TEXT[k]||'')+'</p><p class="zahl">'+(c?buecherWort(c):'Bald verfügbar')+'</p>');d.type='button';d.style.setProperty('--h',kartenFarbe(i));d.onclick=function(){zeigeUnter(k)};l.appendChild(d)})}
+function zeigeUnter(k){AKT_KAT=k;ANSICHT='unter';krumen([{text:'Alle Kategorien',fn:zeigeKats},{text:k}]);var l=document.getElementById('liste');l.innerHTML='';l.className='grid';l.appendChild(el('h2','titel',esc(k)));var alle=unterAlle(k);var mit=alle.filter(function(u){return unterCount(k,u)>0});var ohne=alle.filter(function(u){return unterCount(k,u)===0});if(!mit.length){l.className='';l.appendChild(el('div','leerhinweis','In dieser Kategorie gibt es noch keine Bücher. Sie kommen bald.'));return}var idx=ALLE_KATS.indexOf(k);mit.forEach(function(u){var d=el('button','katcard','<h2>'+esc(u)+'</h2><p class="zahl">'+buecherWort(unterCount(k,u))+'</p>');d.type='button';d.style.setProperty('--h',kartenFarbe(idx));d.onclick=function(){zeigeBuecher(k,u)};l.appendChild(d)});if(ohne.length){l.appendChild(el('p','unter-titel','Noch ohne Bücher: '+ohne.map(esc).join(', ')))}}
+function zeigeBuecher(k,u){AKT_KAT=k;AKT_UNTER=u;ANSICHT='buecher';krumen([{text:'Alle Kategorien',fn:zeigeKats},{text:k,fn:function(){zeigeUnter(k)}},{text:u}]);var l=document.getElementById('liste');l.innerHTML='';l.className='';l.appendChild(el('h2','titel',esc(u)));l.appendChild(el('p','unter-titel',buecherWort(unterCount(k,u))+' in '+esc(k)));var gef=sichtbar().filter(function(b){return b.kat===k&&b.unter===u});if(!gef.length){l.appendChild(el('div','leerhinweis','Noch keine Bücher hier. Sie kommen bald.'));return}gef.forEach(function(b){l.appendChild(buchKarte(b))})}
+function filtern(){var q=document.getElementById('suche').value.toLowerCase().trim();if(!q){if(ANSICHT==='kats')zeigeKats();else if(ANSICHT==='unter')zeigeUnter(AKT_KAT);else zeigeBuecher(AKT_KAT,AKT_UNTER);return}krumen([{text:'Alle Kategorien',fn:function(){document.getElementById('suche').value='';zeigeKats()}},{text:'Suche'}]);var l=document.getElementById('liste');l.innerHTML='';l.className='';var gef=sichtbar().filter(function(b){return b.title.toLowerCase().includes(q)||b.kat.toLowerCase().includes(q)||b.unter.toLowerCase().includes(q)});l.appendChild(el('h2','titel','Suchergebnis'));l.appendChild(el('p','unter-titel',gef.length?buecherWort(gef.length)+' für „'+esc(q)+'“':'Nichts gefunden'));if(!gef.length){l.appendChild(el('div','leerhinweis','Zu „'+esc(q)+'“ gibt es kein Buch. Versuche ein kürzeres Stichwort oder wähle eine Kategorie.'));return}gef.forEach(function(b){l.appendChild(buchKarte(b))})}
+var LESE_Y=0;var FS=19;
+try{var gespeichert=parseInt(localStorage.getItem('neura_fs'),10);if(gespeichert>=15&&gespeichert<=30)FS=gespeichert}catch(e){}
+function setzeFS(d){FS=Math.max(15,Math.min(30,FS+d));var r=document.getElementById('reader');if(r)r.style.setProperty('--fs',FS+'px');try{localStorage.setItem('neura_fs',String(FS))}catch(e){}}
+function teileLang(s){if(s.length<=1200)return [s];var saetze=s.match(/[^.!?]*[.!?]+["'»“”)]*\s*|[^.!?]+$/g)||[s];var out=[],cur='';saetze.forEach(function(x){cur+=x;if(cur.length>=600){out.push(cur.trim());cur=''}});var r=cur.trim();if(r){if(out.length&&r.length<200){out[out.length-1]+=' '+r}else{out.push(r)}}return out.length?out:[s]}
+function absaetze(t){var nl=String.fromCharCode(10);var s=String(t).replace(/\r/g,'').replace(/[ \t]+/g,' ').trim();var roh=s.split(nl);var out=[];roh.forEach(function(p){p=p.trim();if(!p)return;teileLang(p).forEach(function(q){if(q)out.push(q)})});return out.length?out:[s]}
+function kapName(t){return String(t).replace(/^\s*(Kapitel\s*[0-9]+\s*[-–:]\s*|[0-9]+\s*[.)]\s*)/,'').trim()}
+function schliesse(){if(!H.spielt)posAktuell();hoerStopp();document.body.classList.remove('lesen');document.getElementById('reader').innerHTML='';window.removeEventListener('scroll',fortschritt);window.scrollTo(0,LESE_Y)}
+function fortschritt(){var h=document.documentElement.scrollHeight-window.innerHeight;var p=h>0?Math.min(100,Math.max(0,window.scrollY/h*100)):0;var s=document.getElementById('fb');if(s)s.style.width=p+'%'}
+function oeffnen(k,hoeren){ladeBuch(k,function(b){oeffnenJetzt(b,hoeren)})}
+function oeffnenJetzt(b,hoeren){AKT_BUCH=b;LESE_Y=window.scrollY;var r=document.getElementById('reader');var nl=String.fromCharCode(10);var inh='';var txt='';b.chapters.forEach(function(c,i){var name=esc(kapName(c[0]));inh+='<li><a href="#kap-'+i+'">'+name+'</a></li>';txt+='<section class="kap" id="kap-'+i+'"><h3>'+(i+1)+'. '+name+'</h3>';absaetze(c[1]).forEach(function(p){p=p.trim();if(p)txt+='<p>'+esc(p)+'</p>'});txt+='</section>'});r.innerHTML='<div class="leiste"><div class="leiste-innen"><button type="button" class="zu" id="zu">Zurück</button><span class="mitte">'+esc(b.title)+'</span><button type="button" class="gr" id="hb" aria-label="Hörbuch ein- oder ausschalten">🎧 Hören</button><button type="button" class="gr" id="gk" aria-label="Schrift kleiner">A−</button><button type="button" class="gr" id="gg" aria-label="Schrift größer">A+</button></div><div class="balken"><span id="fb"></span></div><div class="hoer" id="hoer" hidden><button type="button" id="hv" aria-label="Voriges Kapitel">⏮</button><button type="button" class="hp" id="hp">▶ Anhören</button><button type="button" id="hn" aria-label="Nächstes Kapitel">⏭</button><select id="ht" aria-label="Tempo"><option value="0.8">0,8x</option><option value="1">1x</option><option value="1.2">1,2x</option><option value="1.5">1,5x</option></select><select id="hs" aria-label="Stimme"></select><button type="button" id="hx">🔊 Test</button><select id="hz" aria-label="Schlaf-Timer"><option value="0">😴 Timer aus</option><option value="15">15 Min</option><option value="30">30 Min</option><option value="45">45 Min</option><option value="60">60 Min</option><option value="kap">Kapitelende</option></select><span class="hi" id="hi">Tippe auf einen Absatz, um dort zu starten.</span></div></div><article class="lese"><p class="lk">'+esc(b.kat)+' / '+esc(b.unter)+'</p><h2>'+esc(b.title)+'</h2><p class="lm">'+kapZahl(b)+' Kapitel, '+minWort(b)+'</p><div class="modus"><button type="button" class="m" id="m1">📖 Lesen</button><button type="button" class="m" id="m2">🎧 Anhören</button></div><div class="aktzeile"><button type="button" class="dlbtn" onclick="dlOeffnen(AKT_BUCH)">⬇ Download</button><button type="button" class="dlbtn" id="fv" onclick="favToggle(AKT_BUCH)">☆ Favorit</button></div><nav class="inhalt" aria-label="Inhaltsverzeichnis"><h3>Inhalt</h3><ol>'+inh+'</ol></nav>'+txt+'<div class="ende-hilfe"><p>Hat dir das Buch gefallen? Hilf mit, die Bibliothek wachsen zu lassen.</p><button type="button" class="btc-btn" onclick="btcOeffnen()">₿ Bibliothek unterstützen</button></div><div class="ende"><button type="button" id="ze">Zurück zur Übersicht</button></div></article>';r.style.setProperty('--fs',FS+'px');document.body.classList.add('lesen');document.getElementById('zu').onclick=schliesse;document.getElementById('ze').onclick=schliesse;document.getElementById('gk').onclick=function(){setzeFS(-1)};document.getElementById('gg').onclick=function(){setzeFS(1)};window.addEventListener('scroll',fortschritt,{passive:true});window.scrollTo(0,0);fortschritt();hoerInit(hoeren);favUi();posWiederherstellen(b,hoeren)}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('lesen'))schliesse()});
+
+var AKT_BUCH=null;var DL_B=null;var DL_K=null;var CRC_T=null;
+function dlStatus(t){var s=document.getElementById('dl-status');if(s)s.textContent=t}
+function dlOeffnen(b){var m=document.getElementById('dl');if(!m||!b)return;DL_B=b;DL_K=b;document.getElementById('dl-buch').textContent=b.title+' ('+kapZahl(b)+' Kapitel)';dlStatus('');m.hidden=false;document.body.classList.add('btc-offen')}
+function dlSchliessen(){var m=document.getElementById('dl');if(m)m.hidden=true;document.body.classList.remove('btc-offen')}
+function dlName(b){return String(b.title).replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/Ä/g,'Ae').replace(/Ö/g,'Oe').replace(/Ü/g,'Ue').replace(/ß/g,'ss').replace(/[^A-Za-z0-9]+/g,'_').replace(/^_+|_+$/g,'').slice(0,60)||'Buch'}
+function dlDatei(name,blob){var a=document.createElement('a');var url=URL.createObjectURL(blob);a.href=url;a.download=name;a.style.display='none';document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url)},1500)}
+function dlBereit(fn){if(DL_B&&DL_B.chapters){fn();return}if(!DL_K)return;dlStatus('Buch wird geladen ...');ladeBuch(DL_K,function(b){DL_B=b;dlStatus('');fn()})}
+function dlTxt(){dlBereit(dlTxtJetzt)}
+function dlTxtJetzt(){var b=DL_B;if(!b)return;try{var nl=String.fromCharCode(10);var t=String.fromCharCode(65279)+b.title+nl+b.kat+' / '+b.unter+nl+nl;b.chapters.forEach(function(c,i){t+=(i+1)+'. '+kapName(c[0])+nl+nl+absaetze(c[1]).join(nl+nl)+nl+nl});dlDatei(dlName(b)+'.txt',new Blob([t],{type:'text/plain;charset=utf-8'}));dlStatus('Download gestartet: '+dlName(b)+'.txt')}catch(e){dlStatus('Download nicht möglich: '+e.message)}}
+function crc32(u8){if(!CRC_T){CRC_T=[];for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);CRC_T[n]=c>>>0}}var x=0xFFFFFFFF;for(var i=0;i<u8.length;i++)x=CRC_T[(x^u8[i])&255]^(x>>>8);return (x^0xFFFFFFFF)>>>0}
+function zipBauen(dateien){var enc=new TextEncoder();var teile=[];var zentral=[];var off=0;
+var u16=function(v){return [v&255,(v>>>8)&255]};var u32=function(v){return [v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255]};
+dateien.forEach(function(f){var nm=enc.encode(f.n);var crc=crc32(f.d);var sz=f.d.length;
+var lk=new Uint8Array([].concat(u32(0x04034b50),u16(20),u16(0x0800),u16(0),u16(0),u16(0x21),u32(crc),u32(sz),u32(sz),u16(nm.length),u16(0)));
+teile.push(lk,nm,f.d);
+zentral.push(new Uint8Array([].concat(u32(0x02014b50),u16(20),u16(20),u16(0x0800),u16(0),u16(0),u16(0x21),u32(crc),u32(sz),u32(sz),u16(nm.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(off))),nm);
+off+=lk.length+nm.length+sz});
+var zg=0;zentral.forEach(function(z){zg+=z.length});
+var ende=new Uint8Array([].concat(u32(0x06054b50),u16(0),u16(0),u16(dateien.length),u16(dateien.length),u32(zg),u32(off),u16(0)));
+return new Blob(teile.concat(zentral,[ende]),{type:'application/epub+zip'})}
+function dlEpub(){dlBereit(dlEpubJetzt)}
+function dlEpubJetzt(){var b=DL_B;if(!b)return;try{var nl=String.fromCharCode(10);var enc=new TextEncoder();var dat=[];
+var add=function(n,s){dat.push({n:n,d:enc.encode(s)})};
+var kopf='<?xml version="1.0" encoding="UTF-8"?>'+nl;
+var seite=function(titel,inh){return kopf+'<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de"><head><meta charset="utf-8"/><title>'+esc(titel)+'</title><link rel="stylesheet" type="text/css" href="style.css"/></head><body>'+inh+'</body></html>'};
+add('mimetype','application/epub+zip');
+add('META-INF/container.xml',kopf+'<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><rootfiles><rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/></rootfiles></container>');
+add('OEBPS/style.css','body{font-family:serif;line-height:1.6}h1{text-align:center;margin:3em 0 .5em}h2{margin:1.2em 0 .8em}p{margin:0 0 .9em}.sub{text-align:center;color:#555}');
+var man='<item id="titel" href="titel.xhtml" media-type="application/xhtml+xml"/>';var spine='<itemref idref="titel"/>';var navli='';
+add('OEBPS/titel.xhtml',seite(b.title,'<h1>'+esc(b.title)+'</h1><p class="sub">'+esc(b.kat)+' / '+esc(b.unter)+'</p><p class="sub">NEURA Library</p>'));
+b.chapters.forEach(function(c,i){var nm=esc(kapName(c[0]));var h='<h2>'+(i+1)+'. '+nm+'</h2>';absaetze(c[1]).forEach(function(p){p=p.trim();if(p)h+='<p>'+esc(p)+'</p>'});add('OEBPS/kap'+i+'.xhtml',seite(nm,h));man+='<item id="k'+i+'" href="kap'+i+'.xhtml" media-type="application/xhtml+xml"/>';spine+='<itemref idref="k'+i+'"/>';navli+='<li><a href="kap'+i+'.xhtml">'+nm+'</a></li>'});
+add('OEBPS/nav.xhtml',kopf+'<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="de" lang="de"><head><meta charset="utf-8"/><title>Inhalt</title></head><body><nav epub:type="toc"><h1>Inhalt</h1><ol>'+navli+'</ol></nav></body></html>');
+add('OEBPS/content.opf',kopf+'<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="bid"><metadata xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:identifier id="bid">'+esc('neura-'+dlName(b))+'</dc:identifier><dc:title>'+esc(b.title)+'</dc:title><dc:language>de</dc:language><dc:creator>NEURA Library</dc:creator><meta property="dcterms:modified">'+new Date().toISOString().slice(0,19)+'Z</meta></metadata><manifest><item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/><item id="css" href="style.css" media-type="text/css"/>'+man+'</manifest><spine>'+spine+'</spine></package>');
+dlDatei(dlName(b)+'.epub',zipBauen(dat));dlStatus('Download gestartet: '+dlName(b)+'.epub')}catch(e){dlStatus('Download nicht möglich: '+e.message)}}
+document.addEventListener('keydown',function(e){var m=document.getElementById('dl');if(e.key==='Escape'&&m&&!m.hidden){e.stopImmediatePropagation();dlSchliessen()}},true);
+
+var HOER_OK=('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window);
+var H={chunks:[],pos:0,spielt:false,tok:0,rate:1,voice:'',stimmen:[],einfach:false};
+try{var hr=parseFloat(localStorage.getItem('neura_tempo'));if(hr===0.8||hr===1||hr===1.2||hr===1.5)H.rate=hr;H.voice=localStorage.getItem('neura_stimme')||''}catch(e){}
+function hoerTeile(t){var MAX=140,MIN=40;var out=[];var s=String(t).trim();while(s.length>0){if(s.length<=MAX){out.push(s);break}var cut=-1;var i;for(i=MAX;i>MIN;i--){var c=s.charAt(i-1);if((c==='.'||c==='!'||c==='?')&&s.charAt(i)===' '){cut=i;break}}if(cut<0){for(i=MAX;i>MIN;i--){var c2=s.charAt(i-1);if(c2===','||c2===';'||c2===':'){cut=i;break}}}if(cut<0){cut=s.lastIndexOf(' ',MAX);if(cut<1)cut=MAX}out.push(s.slice(0,cut).trim());s=s.slice(cut).trim()}return out}
+function hoerBauen(){H.chunks=[];var ks=document.querySelectorAll('#reader .kap');for(var i=0;i<ks.length;i++){var h3=ks[i].querySelector('h3');if(h3)H.chunks.push({el:h3,t:'Kapitel '+(i+1)+'. '+h3.textContent.replace(/^[0-9]+[.] /,''),k:i});var ps=ks[i].querySelectorAll('p');for(var j=0;j<ps.length;j++){var teile=hoerTeile(ps[j].textContent);for(var m=0;m<teile.length;m++)H.chunks.push({el:ps[j],t:teile[m],k:i})}}}
+function hoerStimmen(){var s=document.getElementById('hs');if(!s)return;var all=speechSynthesis.getVoices()||[];H.stimmen=all.filter(function(v){return v.lang&&v.lang.toLowerCase().indexOf('de')===0});s.innerHTML='';if(!H.stimmen.length){s.style.display='none';return}s.style.display='';H.stimmen.forEach(function(v){var o=document.createElement('option');o.value=v.name;o.textContent=v.name;if(v.name===H.voice)o.selected=true;s.appendChild(o)});if(!H.voice)H.voice=H.stimmen[0].name}
+function hoerStimme(){for(var i=0;i<H.stimmen.length;i++){if(H.stimmen[i].name===H.voice)return H.stimmen[i]}return H.stimmen[0]||null}
+function hoerUi(){var b=document.getElementById('hp');if(b)b.textContent=H.spielt?'⏸ Pause':'▶ Anhören'}
+function hoerInfo(t){var i=document.getElementById('hi');if(i)i.textContent=t}
+function hoerMark(c,erzwingen){if(!c)return;var o=document.querySelector('#reader .spricht');if(o&&o!==c.el)o.classList.remove('spricht');var neu=(o!==c.el);c.el.classList.add('spricht');hoerInfo('Kapitel '+(c.k+1)+' von '+document.querySelectorAll('#reader .kap').length+' - tippe auf einen Absatz, um dort zu starten.'+schlafText());posHoer(c);if((neu||erzwingen)&&c.el.scrollIntoView)c.el.scrollIntoView({block:'center',behavior:'smooth'})}
+function hoerFehler(t){H.spielt=false;H.tok++;try{speechSynthesis.cancel()}catch(e){}hoerUi();hoerInfo(t)}
+function hoerDiag(){var n=0;try{n=(speechSynthesis.getVoices()||[]).length}catch(e){}return 'Stimmen: '+n+', davon deutsch: '+H.stimmen.length}
+function hoerSprich(wieder){if(!H.spielt)return;var tok=++H.tok;if(H.pos>=H.chunks.length){hoerStopp(true);return}var c=H.chunks[H.pos];if(schlafPruefen(c))return;hoerMark(c);var einfach=!!wieder||H.einfach;var u=new SpeechSynthesisUtterance(c.t);H.u=u;if(!einfach){u.lang='de-DE';var v=hoerStimme();if(v){try{u.voice=v;u.lang=v.lang}catch(e){}}}u.rate=H.rate;var lief=false;var t0=Date.now();var est=c.t.length/(11*H.rate)*1000+1500;
+var weiter=function(){if(tok===H.tok&&H.spielt){H.pos++;hoerSprich()}};
+u.onstart=function(){lief=true};u.onend=weiter;
+u.onerror=function(ev){if(tok!==H.tok||!H.spielt)return;if(ev.error==='interrupted'||ev.error==='canceled')return;if(!einfach){H.einfach=true;hoerSprich(true);return}hoerFehler('Vorlesen nicht möglich ('+(ev.error||'Fehler')+'). '+hoerDiag()+'. Bitte die Datei direkt in Safari oder Chrome öffnen.')};
+try{if(speechSynthesis.paused)speechSynthesis.resume();speechSynthesis.speak(u)}catch(e){hoerFehler('Vorlesen nicht möglich: '+e.message);return}
+var iv=setInterval(function(){if(tok!==H.tok||!H.spielt){clearInterval(iv);return}var sp=false;try{sp=speechSynthesis.speaking}catch(e){}if(sp)lief=true;if(lief&&!sp&&!speechSynthesis.pending&&Date.now()-t0>est){clearInterval(iv);weiter()}},500);
+setTimeout(function(){if(tok===H.tok&&H.spielt&&!lief){clearInterval(iv);hoerFehler('Das Vorlesen startet nicht. '+hoerDiag()+'. Diese Ansicht blockiert die Sprachausgabe wahrscheinlich - bitte die Datei direkt in Safari oder Chrome öffnen.')}},5000)}
+function hoerTest(){if(!HOER_OK)return;var ok=false;var go=function(){var u=new SpeechSynthesisUtterance('Hallo, das ist ein Test der Sprachausgabe.');u.lang='de-DE';H.u=u;hoerInfo('Test läuft ... Wenn du nichts hörst: Lautstärke und Stumm-Schalter prüfen.');u.onstart=function(){ok=true;hoerInfo('Test läuft - die Sprachausgabe funktioniert. '+hoerDiag())};u.onerror=function(ev){if(ev.error==='interrupted'||ev.error==='canceled')return;hoerInfo('Test fehlgeschlagen ('+(ev.error||'Fehler')+'). '+hoerDiag())};u.onend=function(){hoerInfo('Test beendet. Hast du etwas gehört? Dann funktioniert das Vorlesen. '+hoerDiag())};try{speechSynthesis.speak(u)}catch(e){hoerInfo('Test nicht möglich: '+e.message)}setTimeout(function(){if(!ok)hoerInfo('Keine Reaktion der Sprachausgabe. '+hoerDiag()+'. Bitte die Datei direkt in Safari oder Chrome öffnen.')},4000)};if(H.spielt){hoerPause();setTimeout(go,150)}else{go()}}
+function hoerNeu(){if(!HOER_OK)return;H.tok++;speechSynthesis.cancel();if(H.spielt){setTimeout(hoerSprich,80)}else if(H.chunks[H.pos]){hoerMark(H.chunks[H.pos],true)}}
+function hoerPause(){H.spielt=false;H.tok++;if(HOER_OK)speechSynthesis.cancel();hoerUi()}
+function hoerStopp(ende){schlafAus();if(ende)posFertig();H.spielt=false;H.tok++;if(HOER_OK)speechSynthesis.cancel();var o=document.querySelector('#reader .spricht');if(o)o.classList.remove('spricht');document.body.classList.remove('hoeren');hoerUi();if(ende){H.pos=0;hoerInfo('Fertig - danke fürs Zuhören!')}}
+function hoerZeigen(an){var p=document.getElementById('hoer');var b=document.getElementById('hb');var m1=document.getElementById('m1');var m2=document.getElementById('m2');if(!p)return;p.hidden=!an;if(b)b.classList.toggle('an',an);if(m1)m1.classList.toggle('an',!an);if(m2)m2.classList.toggle('an',an);document.body.classList.toggle('hoeren',an);if(!an)hoerPause()}
+function hoerKap(r){if(!H.chunks.length)return;var cur=H.chunks[H.pos].k;var erst=0;for(var i=0;i<H.chunks.length;i++){if(H.chunks[i].k===cur){erst=i;break}}var ziel=(r<0&&H.pos>erst)?cur:cur+r;var n=document.querySelectorAll('#reader .kap').length;ziel=Math.max(0,Math.min(n-1,ziel));for(var j=0;j<H.chunks.length;j++){if(H.chunks[j].k===ziel){H.pos=j;break}}hoerNeu()}
+function hoerInit(an){var b=document.getElementById('hb');var p=document.getElementById('hoer');var m1=document.getElementById('m1');var m2=document.getElementById('m2');
+H.pos=0;H.spielt=false;
+if(!HOER_OK){var nein=function(){p.hidden=false;if(m1)m1.classList.remove('an');if(m2)m2.classList.add('an');var h0=document.getElementById('hp');if(h0)h0.disabled=true;hoerInfo('Dieser Browser bzw. diese Ansicht kann nicht vorlesen. Bitte die Datei in Safari, Chrome oder Edge öffnen.')};b.onclick=nein;m2.onclick=nein;m1.onclick=function(){p.hidden=true;m1.classList.add('an');m2.classList.remove('an')};m1.classList.add('an');if(an)nein();return}
+hoerBauen();hoerStimmen();hoerUi();H.pos=posStartChunk();
+var t=document.getElementById('ht');t.value=String(H.rate);
+b.onclick=function(){hoerZeigen(p.hidden)};
+m1.onclick=function(){hoerZeigen(false)};
+m2.onclick=function(){hoerZeigen(true);if(!H.spielt){H.spielt=true;hoerUi();hoerSprich()}};
+document.getElementById('hp').onclick=function(){if(H.spielt){hoerPause()}else{H.spielt=true;hoerUi();hoerSprich()}};
+document.getElementById('hv').onclick=function(){hoerKap(-1)};
+document.getElementById('hn').onclick=function(){hoerKap(1)};
+t.onchange=function(){H.rate=parseFloat(t.value);try{localStorage.setItem('neura_tempo',String(H.rate))}catch(e){}if(H.spielt)hoerNeu()};
+document.getElementById('hs').onchange=function(){H.voice=this.value;try{localStorage.setItem('neura_stimme',H.voice)}catch(e){}if(H.spielt)hoerNeu()};
+var r=document.getElementById('reader');r.onclick=function(e){if(p.hidden)return;var x=e.target;while(x&&x!==r&&x.tagName!=='P'&&x.tagName!=='H3'){x=x.parentNode}if(!x||x===r)return;for(var i=0;i<H.chunks.length;i++){if(H.chunks[i].el===x){H.pos=i;H.spielt=true;hoerUi();hoerNeu();return}}};
+document.getElementById('hz').onchange=function(){schlafSetzen(this.value)};document.getElementById('hx').onclick=hoerTest;hoerZeigen(!!an);if(an){H.spielt=true;hoerUi();hoerSprich()}}
+if(HOER_OK){speechSynthesis.onvoiceschanged=function(){if(document.getElementById('hs'))hoerStimmen()}}
+var BTC='bc1qzkfpp4lvzmxqntaxae5hu99zzdzsgaajsknstp';var BTC_FOKUS=null;
+function btcOeffnen(){var m=document.getElementById('btc');if(!m)return;BTC_FOKUS=document.activeElement;btcStatus('');m.hidden=false;document.body.classList.add('btc-offen');var c=document.getElementById('btc-kopieren');if(c)c.focus()}
+function btcSchliessen(){var m=document.getElementById('btc');if(!m)return;m.hidden=true;document.body.classList.remove('btc-offen');if(BTC_FOKUS&&BTC_FOKUS.focus)BTC_FOKUS.focus()}
+function btcStatus(t){var s=document.getElementById('btc-status');if(s)s.textContent=t}
+function btcKopieren(){var fertig=function(){btcStatus('Adresse kopiert - danke für deine Unterstützung!')};var fallback=function(){var t=document.createElement('textarea');t.value=BTC;t.setAttribute('readonly','');t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();var ok=false;try{ok=document.execCommand('copy')}catch(e){}document.body.removeChild(t);if(ok){fertig()}else{btcStatus('Bitte die Adresse markieren und von Hand kopieren.')}};if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(BTC).then(fertig,fallback)}else{fallback()}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('btc-offen')){e.stopImmediatePropagation();btcSchliessen()}},true);
+
+function lsGet(k,def){try{var v=localStorage.getItem(k);return v?JSON.parse(v):def}catch(e){return def}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+var POS=lsGet('neura_pos',{});var FAV=lsGet('neura_fav',[]);var POS_T=null;
+function bookByTitle(t){for(var i=0;i<BUECHER.length;i++){if(BUECHER[i].title===t)return BUECHER[i]}return null}
+function favIst(b){return FAV.indexOf(b.title)>=0}
+function favToggle(b){if(!b)return;var i=FAV.indexOf(b.title);if(i>=0){FAV.splice(i,1)}else{FAV.push(b.title)}lsSet('neura_fav',FAV);favUi()}
+function favUi(){var sts=document.querySelectorAll('.favstern');for(var i=0;i<sts.length;i++){sts[i].textContent=FAV.indexOf(sts[i].getAttribute('data-t'))>=0?'★':'☆'}var f=document.getElementById('fv');if(f&&AKT_BUCH)f.textContent=favIst(AKT_BUCH)?'★ Favorit':'☆ Favorit';if(ANSICHT==='kats'&&!document.body.classList.contains('lesen')){var ab=document.querySelectorAll('#liste .abschnitt');for(var j=0;j<ab.length;j++)ab[j].parentNode.removeChild(ab[j]);startAbschnitte()}}
+function zuletztListe(){var arr=[];for(var t in POS){if(Object.prototype.hasOwnProperty.call(POS,t)){var b=bookByTitle(t);if(vollstaendig(b))arr.push({b:b,t:POS[t].t||0})}}arr.sort(function(x,y){return y.t-x.t});return arr.slice(0,3).map(function(x){return x.b})}
+function favListe(){var out=[];FAV.forEach(function(t){var b=bookByTitle(t);if(vollstaendig(b))out.push(b)});return out}
+function abschnitt(titel,bs){var s=el('div','abschnitt');s.appendChild(el('h2','titel',esc(titel)));bs.forEach(function(b){s.appendChild(buchKarte(b))});return s}
+function startAbschnitte(){var l=document.getElementById('liste');if(!l||ANSICHT!=='kats')return;var z=zuletztListe();var f=favListe();var teile=[];if(z.length)teile.push(abschnitt('Zuletzt gelesen',z));if(f.length)teile.push(abschnitt('★ Meine Favoriten',f));var ref=l.firstChild;teile.forEach(function(s){l.insertBefore(s,ref)})}
+var zeigeKatsAlt=zeigeKats;zeigeKats=function(){zeigeKatsAlt();startAbschnitte()};
+function posSpeichern(b,i,total,k,m){if(!b)return;var pc=total>1?Math.round(i/(total-1)*100):0;POS[b.title]={i:i,k:k,pc:pc,t:Date.now(),m:m};lsSet('neura_pos',POS)}
+function posFertig(){if(!AKT_BUCH)return;var s=POS[AKT_BUCH.title]||{i:0,k:0,m:'h'};s.pc=100;s.t=Date.now();POS[AKT_BUCH.title]=s;lsSet('neura_pos',POS)}
+function posAktuell(){if(!AKT_BUCH||!document.body.classList.contains('lesen'))return;var ps=document.querySelectorAll('#reader .kap p');if(!ps.length)return;var idx=ps.length-1;for(var i=0;i<ps.length;i++){if(ps[i].getBoundingClientRect().bottom>110){idx=i;break}}var ks=document.querySelectorAll('#reader .kap');var k=0;for(var j=0;j<ks.length;j++){if(ks[j]===ps[idx].parentNode){k=j;break}}if(window.scrollY<60&&idx===0&&!POS[AKT_BUCH.title])return;posSpeichern(AKT_BUCH,idx,ps.length,k,'l');if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-40)posFertig()}
+function posScroll(){if(POS_T||!AKT_BUCH||H.spielt||!document.body.classList.contains('lesen'))return;POS_T=setTimeout(function(){POS_T=null;posAktuell()},700)}
+window.addEventListener('scroll',posScroll,{passive:true});
+function posHoer(c){if(!AKT_BUCH)return;var ps=document.querySelectorAll('#reader .kap p');var e=c.el.tagName==='H3'?c.el.parentNode.querySelector('p'):c.el;var i=Array.prototype.indexOf.call(ps,e);if(i<0||i===H.lastP)return;H.lastP=i;posSpeichern(AKT_BUCH,i,ps.length,c.k,'h')}
+function posStartChunk(){H.lastP=-1;if(!AKT_BUCH)return 0;var s=POS[AKT_BUCH.title];if(!s||!(s.pc>0)||s.pc>=100)return 0;var ps=document.querySelectorAll('#reader .kap p');var e=ps[s.i];if(!e)return 0;for(var i=0;i<H.chunks.length;i++){if(H.chunks[i].el===e)return i}return 0}
+function toast(text,knopf,fn){var t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.className='toast';document.body.appendChild(t)}t.innerHTML='';var s=document.createElement('span');s.textContent=text;t.appendChild(s);if(knopf){var b=document.createElement('button');b.type='button';b.textContent=knopf;b.onclick=function(){t.hidden=true;fn()};t.appendChild(b)}t.hidden=false;clearTimeout(t.zeit);t.zeit=setTimeout(function(){t.hidden=true},6000)}
+function posWiederherstellen(b,hoeren){var s=POS[b.title];if(!s){POS[b.title]={i:0,k:0,pc:0,t:Date.now(),m:hoeren?'h':'l'};lsSet('neura_pos',POS);return}s.t=Date.now();lsSet('neura_pos',POS);if(!(s.pc>0&&s.pc<100))return;var ps=document.querySelectorAll('#reader .kap p');var e=ps[s.i];if(!e)return;if(!hoeren){window.scrollTo(0,Math.max(0,e.getBoundingClientRect().top+window.scrollY-130))}toast('Weiter bei Kapitel '+(s.k+1)+' ('+s.pc+' %)','Von vorn',function(){s.i=0;s.k=0;s.pc=0;lsSet('neura_pos',POS);if(hoeren&&H.chunks.length){H.pos=0;H.lastP=-1;hoerNeu()}else{window.scrollTo(0,0)}})}
+var SLEEP={end:0,kap:false,k0:0,iv:null};
+function schlafText(){if(SLEEP.kap)return ' | Timer: Kapitelende';if(SLEEP.end){return ' | Timer: noch '+Math.max(1,Math.ceil((SLEEP.end-Date.now())/60000))+' Min'}return ''}
+function schlafAus(){clearInterval(SLEEP.iv);SLEEP.end=0;SLEEP.kap=false;var z=document.getElementById('hz');if(z)z.value='0'}
+function schlafEnde(){schlafAus();hoerPause();hoerInfo('Schlaf-Timer abgelaufen - gute Nacht!')}
+function schlafSetzen(w){clearInterval(SLEEP.iv);SLEEP.end=0;SLEEP.kap=false;if(w==='kap'){SLEEP.kap=true;SLEEP.k0=H.chunks[H.pos]?H.chunks[H.pos].k:0}else if(w!=='0'){SLEEP.end=Date.now()+parseInt(w,10)*60000;SLEEP.iv=setInterval(function(){if(SLEEP.end&&Date.now()>=SLEEP.end)schlafEnde()},1000)}if(H.chunks[H.pos])hoerMark(H.chunks[H.pos])}
+function schlafPruefen(c){if(SLEEP.end&&Date.now()>=SLEEP.end){schlafEnde();return true}if(SLEEP.kap&&c.k!==SLEEP.k0){schlafEnde();return true}return false}
+function start(){document.getElementById('zaehler').textContent=buecherWort(sichtbar().length)+' zum Lesen';zeigeKats()}
+function ladeKatalog(){var l=document.getElementById('liste');l.className='';l.innerHTML='<p class="unter-titel">Bibliothek wird geladen ...</p>';
+ fetch('katalog.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(k){BUECHER=k;start()
+ }).catch(function(e){l.className='';l.innerHTML='';l.appendChild(el('div','leerhinweis','Die Bibliothek konnte nicht geladen werden. Bitte Internetverbindung prüfen und die Seite neu laden.'))})}
+ladeKatalog();
+</script></body></html>
